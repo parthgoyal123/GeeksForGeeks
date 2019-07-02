@@ -10,10 +10,6 @@ using namespace std;
 struct point{
     int x;
     int y;
-    point(int x, int y){
-        this->x = x;
-        this->y = y;
-    }
 };
 
 bool overlap(point l1, point r1, point l2, point r2){
@@ -31,17 +27,15 @@ int main(){
     int t;
     cin >> t;
     while(t--){
-        int a,b;
-        cin >> a >> b;
-        point l1(a,b);
-        cin >> a >> b;
-        point r1(a, b);
-        cin >> a >> b;
-        point l2(a,b);
-        cin >> a >> b;
-        point r2(a, b);
+        point points[4];
+        loop(i,0,4){
+            int a,b;
+            cin >> a >> b;
+            points[i].x = a;
+            points[i].y = b;   
+        }
 
-        if(overlap(l1,r1,l2,r2)){
+        if(overlap(points[0],points[1],points[2],points[3])){
             cout << 1 << endl;
         } else{
             cout << 0 << endl;

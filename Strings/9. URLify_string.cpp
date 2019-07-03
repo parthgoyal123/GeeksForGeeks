@@ -16,17 +16,18 @@ void urlify(string &s){
     cout << sndex << " ";
     int endex = s.length()-1;
     while(s[endex] == ' '){
-        cout << "sendex : " << s[endex] << endl;
+        // cout << "sendex : " << s[endex] << endl;
         endex--;
     }
     cout << endex << " ";
     int j = 0;
     int length_new = endex - sndex + 1;
+    s[endex+1] = '\0';
     loop(i,0,length_new){
-        cout << s[i+sndex] << " ";
+        cout << s[i+sndex] << " " << j << " ";
         s[i] = s[i+sndex]; j++;
     }
-    s[j] = '\0';
+    s[length_new] = '\0';
 
     cout << s << "A" << endl; 
 

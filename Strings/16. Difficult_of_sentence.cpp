@@ -3,10 +3,13 @@
 using namespace std;
 
 #define ll long long
-#define MAX 1000000007
+#define md 1000000007
 #define loop(i,a,b) for(int i=a; i<b; i++)
 #define lloop(i,a,b) for (long long i=a; i<b; i++)
+#define loopr(i,a,b) for(int i = a; i>=b; i--)
 #define iterate(it, v) for (auto it = v.begin(); it!= v.end(); it++)
+#define mk make_pair
+#define pb push_back
 
 template <typename T>
 void printArray(T arr[], int n){
@@ -18,61 +21,47 @@ void printArray(T arr[], int n){
 int main(){
     int t;
     cin >> t;
+    
     string temp;
     getline(cin, temp);
     while(t--){
-        string s;
-        getline(cin, s);
+        string str;
+        getline(cin, str);
         
-        int n = s.length();
+        transform(str.begin(), str.end(), str.begin(), ::tolower);
         
-        int consonants = 0;
-        int vowels = 0;
-        int continuous_cons = 0;
+        if (str[str.size()-1] != ' ') {
+            str += ' ';    
+        }
+        
         int hard = 0;
         int easy = 0;
         
-        int i = 0;
+        int cons = 0;
+        int vowels = 0;
         
-        for(i = 0; i<n; i++) {
-            if(s[i] == ' ') {
-                if (consonants > vowels) {
+        int consecutive_cons = 0;
+        bool flag = false;
+        
+        loop(i, 0, str.size()) {
+            if (str[i] == ' ') {
+                if ((cons > vowels) || flag) {
                     hard++;
                 } else {
                     easy++;
                 }
                 
-                consonants = 0;
-                vowels = 0;
-                continuous_cons = 0;
-            } else if (s[i] == 'a' || s[i] == 'e' || s[i] == 'u' || s[i] == 'o' || s[i] == 'i') {
+                cons = 0, vowels = 0, consecutive_cons = 0, flag = false;
+            } else if (str[i] == 'a' || str[i] == 'e' ||str[i] == 'i' ||str[i] == 'o' ||str[i] == 'u') {
+                consecutive_cons = 0;
                 vowels++;
-                continuous_cons = 0;
             } else {
-                consonants++;
-                continuous_cons++;
+                cons++;
+                consecutive_cons++;
                 
-                if(continuous_cons == 4) {
-                    hard++;
-                    consonants = 0;
-                    vowels = 0;
-                    continuous_cons = 0;
-                    
-                    while(i < n && s[i] != ' ') {
-                        i++;
-                    }
-                    if(i == n){
-                        i++;
-                    }
+                if(consecutive_cons == 4) {
+                    flag = true;
                 }
-            }
-        }
-        
-        if(i == n) {
-            if(consonants > vowels) {
-                hard++;
-            } else {
-                easy++;
             }
         }
         

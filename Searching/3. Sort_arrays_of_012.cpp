@@ -14,42 +14,48 @@ int main(){
         int n;
         cin >> n;
         int arr[n];
-
         loop(i,0,n){
             cin >> arr[i];
         }
 
-        int left = 0;
-        int right = n-1;
+        // Method 1 (Important)
 
-        while(left<right){
-            while(arr[left] == 0){
-                left++;
-            }
-            while(arr[right] == 1){
-                right--;
-            }
-            if(left<right){
-                arr[left] = 0;
-                arr[right] = 1;
-                left++;
-                right--;
+        int low = 0;
+        int mid = 0;
+        int end = n-1;
+
+        while(mid <= end){
+            switch(arr[mid]){
+                case 0:{
+                    swap(arr[low++], arr[mid++]);
+                    break;
+                }
+                case 1:{
+                    mid++;
+                    break;
+                }
+                case 2:{
+                    swap(arr[mid], arr[end--]);
+                    break;
+                }
             }
         }
-        
+
         loop(i,0,n){
             cout << arr[i] << " ";
-        }
-        cout << endl;
-
+        } cout << endl;
+    }
+}
         // ======== METHOD 2 ========== //
-        // int one = 0, zero = 0;
+        // int one = 0, zero = 0, two = 0;
         // loop(i,0,n){
         //     cin >> arr[i];
         //     if(arr[i] == 0){
         //         zero++;
         //     } else if(arr[i] == 1){
         //         one++;
+        //     } else{
+        //         two++;
         //     }
         // }
         
@@ -57,10 +63,12 @@ int main(){
         //     arr[i] = 0;
         //     cout << 0 << " ";
         // }
-        // loop(i,zero,n){
+        // loop(i,zero,zero+one){
         //     arr[i] = 1;
         //     cout << 1 << " ";
         // }
+        // loop(i,zero+one, n){
+        //     arr[i] = 2;
+        //     cout << 2 << " ";
+        // }
         // cout << endl;
-    }
-}

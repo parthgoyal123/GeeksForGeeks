@@ -17,6 +17,7 @@ void push(struct Node** head_ref, int new_data) {
     new_Node->next = (*head_ref);
     (*head_ref) = new_Node;
 }
+
 void printList(struct Node* Node) {
     while (Node != NULL) {
         printf("%d ", Node->data);

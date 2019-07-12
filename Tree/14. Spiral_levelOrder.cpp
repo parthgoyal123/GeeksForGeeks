@@ -15,7 +15,7 @@ void printSpiral(struct Node *root);
 /* Driver program to test above functions*/
 int main()
 {
-   int t;
+   int t;   
   scanf("%d", &t);
   while (t--)
   {

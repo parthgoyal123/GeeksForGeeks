@@ -49,7 +49,6 @@ int main()
     }
 }
 
-
 /*This is a function problem.You only need to complete the function given below*/
 /*
 The structure of linked list is the following
@@ -60,37 +59,52 @@ Node* next;
 };
 */
 
-void deleteNode(Node* node) {
-    if(node == NULL) return;
-    if(node->next == NULL) {
-        delete node;
-        return;
-    }
-    
-    node->data = node->next->data;
-    Node* temp = node->next;
-    node->next = temp->next;
-    delete(temp);
-}
-
-Node *compute(Node *head){
+Node* reverseList(Node *head) {
     if(!head || !head->next) return head;
     
-    stack<Node*> s;
+    Node* prev = NULL;
+    Node* next = NULL;
     Node* curr = head;
-    s.push(curr);
     
     while(curr) {
-        curr = curr->next;
-        int data = curr->data;
-        
-        while(!s.empty() && data > s.top()->data) {
-            Node* top = s.top();
-            s.pop();
-            deleteNode(top);
-        }
-        s.push(curr);
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
     }
     
+    return prev;
+}
+
+Node *compute(Node *head)
+{
+    if(!head || !head->next) return head;
+    
+    head = reverseList(head);
+    
+    int maximum = head->data;
+    Node *curr = head;
+    Node* prev = NULL;
+    
+    while(curr) {
+        int data = curr->data;
+        
+        if(data < maximum) {
+            prev->next = curr->next;
+            Node* temp = curr;
+            delete temp;
+            curr = prev->next;
+            continue;
+        }
+        if(data >= maximum) {
+            maximum = data;
+        }
+        
+        prev = curr;
+        curr = curr->next;
+    }
+    
+    head = reverseList(head);
     return head;
+    
 }

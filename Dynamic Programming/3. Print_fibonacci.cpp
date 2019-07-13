@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#define ll long long
+#define ll unsigned long long
 #define md 1000000007
 #define loop(i,a,b) for(int i=a; i<b; i++)
 #define lloop(i,a,b) for (long long i=a; i<b; i++)
@@ -18,29 +18,34 @@ void printArray(T arr[], int n){
     } cout << endl;
 }
 
-int ** calculatePaths(int n, int m) {
-    int **arr = new int*[n];
-    loop(i,0,n) arr[i] = new int[m];
-    
-    loop(i,0,n) arr[i][0] = 1;
-    loop(i,0,m) arr[0][i] = 1;
-    
-    loop(i,1,n){
-        loop(j,1,m){
-            arr[i][j] = arr[i][j-1] + arr[i-1][j];
-        }
+void printFibTillN(int n) {
+    if(n<0) return;
+    if(n == 1) {
+        cout << 1 << endl;
+        return;
+    } if(n == 2) {
+        cout << 1 << " " << 1 << endl;
+        return;
     }
-    return arr;
+    
+    ll int *fib = new ll int[n];
+    fib[0] = 1; fib[1] = 1;
+    
+    cout << fib[0] << " " << fib[1] << " ";
+    
+    loop(i,2,n){
+        fib[i] = fib[i-1] + fib[i-2];
+        cout << fib[i] << " ";
+    }
+    cout << endl;
 }
 
 int main(){
     int t;
     cin >> t;
-    int **arr = calculatePaths(15,15);
     while(t--){
-        int n, m;
-        cin >> n >> m;
-        int paths = arr[n-1][m-1];
-        cout << paths << endl;
+        int n;
+        cin >> n;
+        printFibTillN(n);
     }
 }

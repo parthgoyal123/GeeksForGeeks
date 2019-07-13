@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#define ll long long
+#define ll unsigned long long
 #define md 1000000007
 #define loop(i,a,b) for(int i=a; i<b; i++)
 #define lloop(i,a,b) for (long long i=a; i<b; i++)
@@ -18,29 +18,32 @@ void printArray(T arr[], int n){
     } cout << endl;
 }
 
-int ** calculatePaths(int n, int m) {
-    int **arr = new int*[n];
-    loop(i,0,n) arr[i] = new int[m];
+ll int binomialCoefficient(int n, int r) {
+    if(n < r) return 0;
+    if(n == r) return 1;
+    if(r == 1 || r == n-1) return n;
     
-    loop(i,0,n) arr[i][0] = 1;
-    loop(i,0,m) arr[0][i] = 1;
+    ll final = 1;
     
-    loop(i,1,n){
-        loop(j,1,m){
-            arr[i][j] = arr[i][j-1] + arr[i-1][j];
-        }
+    if(r > n-r) {
+        r = n-r;
     }
-    return arr;
+    
+    loop(i, 0, r) {
+        final *= (n-i)%md;
+        final /= (i+1)%md;
+    }
+    
+    return final % md;
 }
 
 int main(){
     int t;
     cin >> t;
-    int **arr = calculatePaths(15,15);
     while(t--){
-        int n, m;
-        cin >> n >> m;
-        int paths = arr[n-1][m-1];
-        cout << paths << endl;
+        int n, r;
+        cin >> n >> r;
+        ll bin_coeff = binomialCoefficient(n,r);
+        cout << bin_coeff << endl;
     }
 }

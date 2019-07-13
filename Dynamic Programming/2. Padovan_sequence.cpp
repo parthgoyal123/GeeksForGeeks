@@ -18,29 +18,22 @@ void printArray(T arr[], int n){
     } cout << endl;
 }
 
-int ** calculatePaths(int n, int m) {
-    int **arr = new int*[n];
-    loop(i,0,n) arr[i] = new int[m];
+void calculatePadovan(ll int *padovan, int n) {
+    padovan[0] = 1; padovan[1] = 1; padovan[2] = 1;
     
-    loop(i,0,n) arr[i][0] = 1;
-    loop(i,0,m) arr[0][i] = 1;
-    
-    loop(i,1,n){
-        loop(j,1,m){
-            arr[i][j] = arr[i][j-1] + arr[i-1][j];
-        }
+    loop(i,3,n){
+        padovan[i] = (padovan[i-2]%md + padovan[i-3]%md)%md;
     }
-    return arr;
 }
 
 int main(){
     int t;
     cin >> t;
-    int **arr = calculatePaths(15,15);
+    ll int padovan[101];
+    calculatePadovan(padovan, 101);
     while(t--){
-        int n, m;
-        cin >> n >> m;
-        int paths = arr[n-1][m-1];
-        cout << paths << endl;
+        int n;
+        cin >> n;
+        cout << padovan[n] << endl;
     }
 }

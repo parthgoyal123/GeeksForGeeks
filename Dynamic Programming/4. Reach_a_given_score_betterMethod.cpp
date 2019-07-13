@@ -18,16 +18,25 @@ void printArray(T arr[], int n){
     } cout << endl;
 }
 
-int ** calculatePaths(int n, int m) {
-    int **arr = new int*[n];
-    loop(i,0,n) arr[i] = new int[m];
+template <typename T>
+void printMatrix(T **arr, int r, int c){
+    loop(i,0,r){
+        loop(j,0,c){
+            cout << arr[i][j] << " ";
+        } cout << endl;
+    }
+}
+
+int* calculateCombinations(int *brr, int n, int different_coins) {
+    int *arr = new int[n+1];
+
+    memset(arr, 0, sizeof(arr));
     
-    loop(i,0,n) arr[i][0] = 1;
-    loop(i,0,m) arr[0][i] = 1;
+    arr[0] = 1;
     
-    loop(i,1,n){
-        loop(j,1,m){
-            arr[i][j] = arr[i][j-1] + arr[i-1][j];
+    loop(i,0,different_coins){
+        loop(j, brr[i], n+1) {
+            arr[j] += arr[j - brr[i]];
         }
     }
     return arr;
@@ -36,11 +45,12 @@ int ** calculatePaths(int n, int m) {
 int main(){
     int t;
     cin >> t;
-    int **arr = calculatePaths(15,15);
+    int brr[] = {3,5,10};
+    int *arr = calculateCombinations(brr, 1000, 3);
+    
     while(t--){
-        int n, m;
-        cin >> n >> m;
-        int paths = arr[n-1][m-1];
-        cout << paths << endl;
+        int n;
+        cin >> n;
+        cout << arr[n] << endl;
     }
 }

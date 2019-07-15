@@ -18,39 +18,52 @@ void printArray(T arr[], int n){
     } cout << endl;
 }
 
-int longestSubsequenceLength(string s, string t) {
+bool isPalindrome(string &s) {
+    int n = s.size();
+    loop(i,0,n/2) {
+        if(s[i] != s[n-i]) return false;
+    }
+    return true;
+}
+
+int LCS(string &s, string &t) {
     int n = s.size();
     int m = t.size();
     
-    int count[m+1][n+1];
-        
+    int dp[m+1][n+1];
+    
     loop(i,0,m+1) {
         loop(j,0,n+1) {
-
             if(i == 0 || j == 0) {
-                count[i][j] = 0;
-                continue;
-            }
-
-            if(s[j-1] != t[i-1]) {
-                count[i][j] = max(count[i][j-1], count[i-1][j]);
+                dp[i][j] = 0;
+            } else if (t[i-1] == s[j-1]) {
+                dp[i][j] = 1 + dp[i-1][j-1];
             } else {
-                count[i][j] = 1 + count[i-1][j-1];
+                dp[i][j] = max(dp[i][j-1], dp[i-1][j]);
             }
         }
     }
-    return count[m][n];
+    
+    return dp[m][n];   
+}
+
+int formAPalindrome(string &s) {
+    if(isPalindrome(s)) return 1;
+    
+    string t = s;
+    reverse(t.begin(), t.end());
+    int lcs = LCS(s, t);
+    
+    return s.size() - lcs;
 }
 
 int main(){
     int t;
     cin >> t;
     while(t--){
-        int n, m;
-        cin >> n >> m;
-        string s, t;
-        cin >> s >> t;
+        string s;
+        cin >> s;
         
-        cout << longestSubsequenceLength(s, t) << endl;
+        cout << formAPalindrome(s) << endl;
     }
 }

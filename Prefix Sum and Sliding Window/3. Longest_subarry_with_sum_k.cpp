@@ -14,7 +14,7 @@ void printArray(T arr[], int n){
     } cout << endl;
 }
 
-int exits(int *arr, int n, int k){
+int exists(int *arr, int n, int k){
     unordered_map<int, int> hash;
     ll curr_sum = 0;
     ll sum = k;
@@ -63,7 +63,7 @@ int main(){
         loop(i,0,n){
             cin >> arr[i];
         }
-        cout << exits(arr, n, k) << endl;
+        cout << exists(arr, n, k) << endl;
     
     }
 }

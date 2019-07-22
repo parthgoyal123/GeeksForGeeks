@@ -30,7 +30,7 @@ ll int distinctTransformations(string &s, string &t) {
     
     loop(i,1,n2+1) {
         loop(j,1,n1+1) {
-            if(t[i-1] == s[j-1]) {
+            if(t[i-1] != s[j-1]) {
                 dp[i][j] = dp[i][j-1];
             } else {
                 dp[i][j] = dp[i][j-1] + dp[i-1][j-1];

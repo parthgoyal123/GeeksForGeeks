@@ -28,9 +28,7 @@ bool presentInDictionary(string *s, int n, string x) {
 bool canBreakIntoWords(string &s, string* arr, int n) {
     int len = s.size();
     
-    bool dp[len] = {0};
     int left = 0;
-    int right = 0;
     
     loop(i,0,len) {
         string t = s.substr(left, i-left+1);

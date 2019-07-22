@@ -23,6 +23,7 @@ void push(struct Node** head_ref, int new_data) {
     new_node->next = (*head_ref);
     (*head_ref) = new_node;
 }
+Node* mergeSort(Node* head);
 int main() {
     long test;
     cin >> test;

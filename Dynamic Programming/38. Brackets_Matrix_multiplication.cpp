@@ -61,6 +61,7 @@ void matrixChainOrder(int *arr, int n) {
     }
     
     char name = 'A';
+    cout << "Optimized Brackets for Matrix Multiplication : ";
     printParanthesis(1, n-1, n, bracket, name);
     cout << endl;
 }

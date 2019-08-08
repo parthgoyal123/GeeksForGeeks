@@ -25,34 +25,45 @@ void printMatrix(T **arr, int m, int n){
     } cout << endl;
 }
 
-int getfirst(string &a, string &b) {
-    int n1 = a.size();
-    int n2 = b.size();
+string stringNew(int n) {
 
-    int store1, store2;
-    loopr(i,n2-1,0){
-        if(b[i] == '1') {
-            store1 = n2-i;
-            break;
+    int y = 1;
+
+    bool flag = false;
+    while(1) {
+
+        if(n%y != 0) {
+            y++;
+            continue;
+        }
+        
+        int x = (1 + sqrt(1 + 8*(n/y)))/2;
+
+        if(x*x - x - 2*(n/y) == 0) {
+            string s;
+
+            loop(i,0,y) {
+                s += "1";
+            }
+
+            loop(i,0,x) {
+                s = s + "3";
+            }
+
+            s = s + "7";
+
+            return s;
         }
     }
 
-    loopr(i,n1-1,0){
-        if(a[i] == '1' && (n1-i) >= store1) {
-            store2 = n1-i;
-            break;
-        }
-    }
 
-    return abs(store1-store2);
 }
 
 int main(){
     int t;
     cin >> t;
     while(t--){
-        string a, b;
-        cin >> a >> b;
-        cout << getfirst(a, b) << endl;
+        int n; cin >> n;
+        cout << stringNew(n) << endl;
     }
 }

@@ -83,6 +83,7 @@ void printSpiral(Node *root) {
     
     int count = 1;
     
+    // perform level order traversal
     while(!q.empty()) {
         int curr_size = q.size();
         
@@ -90,12 +91,15 @@ void printSpiral(Node *root) {
             Node* top = q.front();
             q.pop();
             
+            // print only in case when count is even
             if(count%2 == 0) cout << top->data << " ";
+            
+            // push in stack in case when count in odd
+            if(count%2 == 1) s.push(top->data);
             
             if(top->left) q.push(top->left);
             if(top->right) q.push(top->right);
             
-            if(count%2 == 1) s.push(top->data);
         }
         
         if(count%2 == 1) {

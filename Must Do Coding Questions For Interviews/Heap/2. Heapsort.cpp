@@ -53,18 +53,24 @@ void heapSort(int arr[], int n)  {
 // To heapify a subtree rooted with node i which is  an index in arr[]. 
 // n is size of heap. This function  is used in above heapSor()
 void heapify(int arr[], int n, int i)  {
+
+    // get the left and right child index
     int l = 2*i+1;
     int r = 2*i+2;
     
     int largest = i;
+
+    // see if left child is larger or not
     if(l<n && arr[l] > arr[largest]) {
         largest = l;
     }
     
+    // see if right child is greater than largest
     if(r<n && arr[largest] < arr[r]) {
         largest = r;
     }
     
+    // if largest != i that means, left or right is largest, therefore swap and heapify
     if(largest != i) {
         swap(arr[i], arr[largest]);
         heapify(arr, n, largest);
@@ -72,6 +78,8 @@ void heapify(int arr[], int n, int i)  {
 }
 // Rearranges input array so that it becomes a max heap
 void buildHeap(int arr[], int n)  { 
+
+    // internal nodes start from index n/2-1;
     for(int i = n/2-1; i>=0; i--) {
         heapify(arr, n, i);
     }

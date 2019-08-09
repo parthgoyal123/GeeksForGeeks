@@ -100,9 +100,11 @@ struct MinHeap
 int MinHeap ::  extractMin()
 {
     if(heap_size == 0) return -1;
-    
+
+    // get the min element   
     int minEle = harr[0];
     
+    // swap with the last element and call heapify
     swap(harr[heap_size-1], harr[0]);
     heap_size -= 1;
     
@@ -116,6 +118,7 @@ void MinHeap :: deleteKey(int i)
 {
     if(i<0 || i >= heap_size) return;
     
+    // make this index element as minelement and then extract it out
     this->decreaseKey(i, INT_MIN);
     this->extractMin();
 }
@@ -126,10 +129,12 @@ void MinHeap ::insertKey(int k)
        return;
    }
    
+   // insert the new element at last
    harr[heap_size++] = k;
    
    int i = heap_size-1;
    
+   // if this element is smaller than its parent, swap with it
    while(i!=0 && harr[parent(i)] > harr[i]) {
        swap(harr[parent(i)], harr[i]);
        i = parent(i);
@@ -138,6 +143,7 @@ void MinHeap ::insertKey(int k)
 // Decrease Key operation, helps in deleting key from heap
 void MinHeap::decreaseKey(int i, int new_val)
 {
+    // change the index arr to new_val and get it to its proper location
     harr[i] = new_val;
     while (i != 0 && harr[parent(i)] > harr[i])
     {

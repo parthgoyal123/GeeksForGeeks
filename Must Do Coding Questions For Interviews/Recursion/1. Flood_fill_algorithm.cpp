@@ -29,12 +29,18 @@ void printMatrix(T **arr, int n, int m){
 }
 
 void floodFillUtil(int **arr, int m, int n, int x, int y, int k, int orig_color) {
+
+    // check for base conditions
     if(x<0 || x>=m || y<0 || y>=n) return;
     
+    // if adjacent is of different color then return;
     if(arr[x][y] != orig_color) return;
     
+    // make this location to new color
     arr[x][y] = k;
     
+
+    // recur for all the adjacent places
     floodFillUtil(arr, m, n, x+1, y, k, orig_color);
     floodFillUtil(arr, m, n, x-1, y, k, orig_color);
     floodFillUtil(arr, m, n, x, y+1, k, orig_color);
@@ -42,11 +48,15 @@ void floodFillUtil(int **arr, int m, int n, int x, int y, int k, int orig_color)
 }
 
 void floodFill(int **arr, int m, int n, int x, int y, int k) {
+
+    // check for invalid input
     if(x<0 || x>=m || y<0 || y>=n) return;
     
-    int prev_color = arr[x][y];
+    // get the original color to be changed
+    int orig_color = arr[x][y];
     
-    floodFillUtil(arr, m, n, x, y, k, prev_color);
+    // this utility function changes all the adjacent original_color matrix locations to new_val k
+    floodFillUtil(arr, m, n, x, y, k, orig_color);
 }
 
 int main(){

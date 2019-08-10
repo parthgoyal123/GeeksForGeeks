@@ -25,20 +25,6 @@ void printMatrix(T **arr, int m, int n){
     } cout << endl;
 }
 
-ll int getMaxValue(int *w, int *v, int n, int W) {
-    ll int dp[W+1];
-    
-    memset(dp, 0, sizeof(dp));
-    
-    loop(i,0,n) {
-        loopr(j,W,w[i]) {
-            dp[j] = max(dp[j], (ll)dp[j-w[i]] + (ll)v[i]);
-        }
-    }
-    
-    return dp[W];
-}
-
 int main(){
     int n, W;
     cin >> n >> W;

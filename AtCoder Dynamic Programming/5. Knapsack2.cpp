@@ -30,9 +30,10 @@ ll int getMaxValue(int *w, int *v, int n, int W) {
     
     memset(dp, 0, sizeof(dp));
     
-    loop(i,0,n) {
-        loopr(j,W,w[i]) {
-            dp[j] = max(dp[j], (ll)dp[j-w[i]] + (ll)v[i]);
+    loop(i,0,W+1) {
+        loop(j,0,n) {
+            if(w[j] <= i)
+                dp[i] = max(dp[i], (ll)dp[i-w[j]] + (ll)v[j]);
         }
     }
     

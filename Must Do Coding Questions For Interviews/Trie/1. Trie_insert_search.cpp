@@ -91,6 +91,40 @@ bool searchInTrie(TrieNode* root, string key) {
     return (pCrawl != NULL && pCrawl->isEndOfWord);
 }
 
+void viewAllWordsInTrieUtil(TrieNode* root, char* str, int level) {
+
+    if(root == NULL) return;
+
+    // check if its a leaf node or word ends here
+    if(root->isEndOfWord == true) {
+        str[level] = '\0';
+        cout << str << endl;
+    }
+
+    for(int i = 0; i<ALPHABET_SIZE; i++) {
+
+        // if child exists, add to str
+        if(root->children[i]) {
+
+            // get the character and append it to str
+            str[level] = i + 'a';
+
+            // recur for children
+            viewAllWordsInTrieUtil(root->children[i], str, level+1);
+        }
+    }
+}
+
+
+void viewAllWordsInTrie(TrieNode *root) {
+
+    // define level and curr string
+    int level = 0;
+    char str[50];
+
+    viewAllWordsInTrieUtil(root, str, level);
+}
+
 int main(){
     ios_base::sync_with_stdio(false);
     int t;
@@ -111,6 +145,7 @@ int main(){
         
         cout << searchInTrie(root, key) << endl;
         
-        
+        viewAllWordsInTrie(root);
     }
+
 }

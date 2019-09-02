@@ -102,6 +102,7 @@ Node* sortedMerge(Node* head1, Node *head2) {
 
 Node* mergeSort(Node* head) {
     
+    // if 0 or 1 node
     if(head == NULL || head->next == NULL) {
         return head;
     }

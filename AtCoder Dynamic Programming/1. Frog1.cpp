@@ -28,6 +28,7 @@ void printMatrix(T **arr, int m, int n){
 ll int getMinCost(int *arr, int n) {
 	ll dp[n];
     dp[0] = 0;
+    
     dp[1] = abs(arr[1]-arr[0]);
 
     loop(i,2,n) {
